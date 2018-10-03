@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="">
 
     <script src="vue.js"></script>
+    <script src="http://localhost:8098"></script>
 
 </head> 
 
@@ -19,22 +20,26 @@
 
     <div id='app'>
         <input type="text" v-on:input="changeTitle">
-        <p>{{ title }}</p>
+        <p>{{ sayHello() }} <a v-bind:href="link">Github</a></p>
     </div>
 
     <script>
         new Vue({
             el: '#app',
             data: {
-                title: "Whatevs"
+                title: "Whatevs",
+                link: 'http://www.github.com'
             },
             methods: {
                 changeTitle: function (event) {
                     this.title = event.target.value;
+                },
+                sayHello: function () {
+                    return this.title;
                 }
             }
         })
     </script>
 </body>
 
-</html>
+</html

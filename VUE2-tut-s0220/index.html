@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+
+    <script src="vue.js"></script>
+    <script src="http://localhost:8098"></script>
+
+</head> 
+
+<body>
+
+    <div id='app'>
+        <button v-on:click="increase(2, $event)"></button>
+        <h1>Count: {{ counter }}</h1>
+
+        <h3>Coordinates</h3>
+        <p v-on:mousemove="updateCoordinates($event)">{{x}}, {{y}} </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                counter: 0,
+                x: 0,
+                y: 0
+            },
+            methods: {
+                increase(step, event){
+                    this.counter+= step;
+                },
+                updateCoordinates(event){
+                    this.x = event.clientX,
+                    this.y = event.clientY
+                }
+            }
+        })
+    </script>
+</body>
+
+</html

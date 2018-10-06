@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+
+    <head>
+
+        <title>Demo of v-if and template tags</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+    </head>
+    <body>
+
+        <div id="app">
+            <p v-if="reveal">This is controlled by v-if<span>~~~this is a "span" inside a "paragraph" tag</span></p>
+            <p v-else>This is revealed when the previous paragraph is hidden</p>
+
+            <template v-if="!reveal">
+                <p>This is a paragraph tag inside a template when the 'reveal' attribute is falsy</p>
+
+            </template>
+            <button @click="reveal = !reveal">Toggle text</button>
+        </div>
+    </body>
+</html>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        reveal: true
+    }
+})
+
+</script>

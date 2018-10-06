@@ -13,7 +13,9 @@
   <!-- 3) Let the user enter a class (create some example classes) and attach it -->
   <div>
     <input type="text" v-model="inputClass">
-    <div :class="inputClass"><p>Please enter highlight, shrink, funk, or ska</p></div>
+    <div :class="inputClass">
+      <p>Please enter highlight, shrink, funk, or ska</p>
+    </div>
   </div>
 
   <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
@@ -24,11 +26,20 @@
     <div :class="[inputClass, {grunge: attachGrunge}]">Ques 4 text</div>
   </div>
 
-    <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+  <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+  <div>
+    <input type="text" v-model="inputColor">
+    <div :style="{backgroundColor: inputColor}">
+      <p>Ques 5 text</p>
+    </div>
+  </div>
+
+    <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
     <div>
-        <input type="text">
-        <div></div>
+        <button v-on:click="startProgress">Start Progress</button>
+        <div :class="[{progressBarStart: isProgressReset},{progressBarGrow: isProgressing}]"></div>
       </div>
+
 </div>
 
 <style>
@@ -64,10 +75,23 @@
 
   .grunge {
     border-radius: 20%;
-    background-color:darkorange;
+    background-color: darkorange;
     transition: all 3s;
   }
 
+  .progressBarStart {
+    background-color: gray;
+    width: 50px !important;
+    height: 100px;
+    border: 1px solid black;
+  }
+
+  .progressBarGrow {
+    width: 200px;
+    height: 100px;
+    background-color: lightgreen;
+    transition: all 1.5s;
+  }
 </style>
 
 <script>
@@ -77,14 +101,24 @@
       isHighlighted: false,
       isShrunk: true,
       inputClass: '',
-      attachGrunge: false
+      attachGrunge: false,
+      inputColor: '',
+      isProgressReset: true,
+      isProgressing: false
     },
     methods: {
-      startEffect: function () {
+      startEffect() {
         let v = this;
-         return setInterval(function () {
+        return setInterval(function () {
           v.isHighlighted = !v.isHighlighted;
           v.isShrunk = !v.isShrunk;
+        }, 2000)
+      },
+      startProgress(){
+        let v = this;
+        return setInterval(() => {
+          v.isProgressReset = !v.isProgressReset;
+          v.isProgressing = !v.isProgressing;
         }, 2000)
       }
     }

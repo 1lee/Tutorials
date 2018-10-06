@@ -10,6 +10,25 @@
   <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
   <div :class="['funk', 'ska']">I got no class :(</div>
 
+  <!-- 3) Let the user enter a class (create some example classes) and attach it -->
+  <div>
+    <input type="text" v-model="inputClass">
+    <div :class="inputClass"><p>Please enter highlight, shrink, funk, or ska</p></div>
+  </div>
+
+  <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
+  <div>
+    <p>Attach grunge? Type true or false</p>
+    <input type="text" v-model="inputClass">
+    <input type="text" label="attach grunge? true or false?" v-model="attachGrunge">
+    <div :class="[inputClass, {grunge: attachGrunge}]">Ques 4 text</div>
+  </div>
+
+    <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+    <div>
+        <input type="text">
+        <div></div>
+      </div>
 </div>
 
 <style>
@@ -23,24 +42,30 @@
     background-color: red;
     width: 200px !important;
     transition: all 20ms;
-
   }
 
   .shrink {
     background-color: gray;
     width: 50px !important;
     transition: all 2s;
-
   }
+
   .funk {
     height: 150px;
     width: 150px;
     background-color: darkmagenta;
     border-radius: 50%;
   }
+
   .ska {
     color: #fa0000;
     font-size: 20px;
+  }
+
+  .grunge {
+    border-radius: 20%;
+    background-color:darkorange;
+    transition: all 3s;
   }
 
 </style>
@@ -50,7 +75,9 @@
     el: '#exercise',
     data: {
       isHighlighted: false,
-      isShrunk: true
+      isShrunk: true,
+      inputClass: '',
+      attachGrunge: false
     },
     methods: {
       startEffect: function () {

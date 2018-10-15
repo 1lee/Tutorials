@@ -3,6 +3,8 @@
         <h3>You may view the User Details here</h3>
         <h3> {{ reverseName() }} </h3>
         <button @click="resetName">Reset Name</button>
+                <button @click="resetFn">Reset Name (Callback)</button>
+
         <p>Many Details</p>
         
     </div>
@@ -10,7 +12,14 @@
 
 <script>
 export default {
-  props: ["name"],
+  props: {
+    name: {
+      type: String
+    },
+    resetFn: {
+      type: Function
+    }
+  },
   methods: {
     reverseName() {
       return this.name

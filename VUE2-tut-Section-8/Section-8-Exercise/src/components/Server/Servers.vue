@@ -10,6 +10,10 @@
 import { Server } from "./Server.vue";
 
 export default {
+  name: "Servers",
+  components: {
+    "app-server": Server
+  },
   data() {
     return {
       servers: [
@@ -20,9 +24,6 @@ export default {
         { id: 1005, status: "Normal" }
       ]
     };
-  },
-  components: {
-    appServer: Server
   }
 };
 </script>

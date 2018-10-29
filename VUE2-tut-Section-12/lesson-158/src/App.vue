@@ -14,6 +14,9 @@
         <p v-highlight:background.delayed="'yellow'">Custom directive example(global)</p>
  
          <p v-local-highlight:background.delayed.blink="'yellow'">Custom directive example(local) </p>
+         
+         <p v-local-highlight:background.blink="{mainColor: 'pink', secondColor: 'lightblue', delay: 500}">Custom directive example(local) - with complex values </p>
+
       </div>
     </div>
   </div>
@@ -30,8 +33,8 @@ export default {
           delay = 2000;
         }
         if (binding.modifiers["blink"]) {
-          let mainColor = binding.value;
-          let secondColor = "orange";
+          let mainColor = binding.value.mainColor;
+          let secondColor = binding.value.secondColor;
           let currentColor = mainColor;
 
           setTimeout(() => {
@@ -45,16 +48,16 @@ export default {
               } else {
                 el.style.color = currentColor;
               }
-            }, 1000);
+            }, binding.value.delay);
             //adjusting styling according to passed arguments after directive
           }, delay);
         } else {
           setTimeout(() => {
             //adjusting styling according to passed arguments after directive
             if (binding.arg == "background") {
-              el.style.backgroundColor = binding.value;
+              el.style.backgroundColor = binding.value.mainColor;
             } else {
-              el.style.color = binding.value;
+              el.style.color = binding.value.secondColor;
             }
           }, delay);
         }

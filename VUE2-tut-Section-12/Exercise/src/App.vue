@@ -12,7 +12,16 @@
 </template>
 
 <script>
-    export default {}
+    export default {
+        directives: {
+            myOn: {
+                bind(el, binding) {
+                    if(typeof binding === 'function'){
+
+                }
+            }
+        }
+    }
 </script>
 
 <style>

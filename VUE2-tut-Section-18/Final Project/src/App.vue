@@ -1,4 +1,4 @@
-NPM <template>
+<template>
     <div class="container">
 
     </div>

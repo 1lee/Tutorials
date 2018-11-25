@@ -1,6 +1,6 @@
 <template>
 <div class="col-md-4 col-sm-6">
-<div class="panel panel-succes">
+<div class="panel panel-info">
 <div class="panel-heading">
     <h3 class="panel-title">
         {{ stock.name }}
@@ -14,6 +14,7 @@
         <input
         type="number"
         class="form-control"
+        :class="{danger: insufficientQuantity}"
         placeholder="Quantity"
         v-model="quantity"/>
         
@@ -22,9 +23,9 @@
         <button
         class="btn btn-success"
         @click="sellStock"
-        :disabled="quantity <= 0 || !isInt(quantity)"
+        :disabled="insufficientQuantity || quantity <= 0 || !isInt(quantity)"
 
-        >SELL
+        >{{ insufficientQuantity ? "Insufficient Qty" : "SELL"}}
         </button>
     </div>
 </div>
@@ -33,7 +34,7 @@
     </template>
 
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   props: ["stock"],
@@ -42,8 +43,13 @@ export default {
       quantity: 0
     };
   },
+  computed: {
+    insufficientQuantity() {
+      return this.quantity > this.stock.quantity;
+    }
+  },
   methods: {
-    ...mapActions(["sellStock"]),
+    ...mapActions({ placeSellOrder: "sellStock" }),
 
     sellStock() {
       const order = {
@@ -51,10 +57,22 @@ export default {
         stockPrice: this.stock.price,
         quantity: this.stock.quantity
       };
+
+      this.placeSellOrder(order);
+      this.quantity = 0;
+    },
+    isInt(number) {
+      if (number % 1 == 0) {
+        return true;
+      }
+      return false;
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
 </style>
